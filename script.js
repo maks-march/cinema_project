@@ -29,7 +29,7 @@ function showMovies(movies) {
         </div>
         <div class="overview">
         <h3>Обзор</h3>
-        ${overview}
+        ${overview}</br>
         <a href = "https://www.kinopoisk.ru/index.php?kp_query=${title}">Смотреть на кинопоиске.</a>
         </div>
         `
