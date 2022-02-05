@@ -12,13 +12,17 @@ getMovies(API_URL);
 async function getMovies(url) {
     const result = await fetch(url);
     const data = await result.json();
+    console.log(data);
     showMovies(data.results);
 }
 
 function showMovies(movies) {
     main.innerHTML = '';
     movies.forEach((movie) => {
-        const {title, poster_path, vote_average, overview} = movie;
+        const {title, poster_path, vote_average, overview, adult} = movie;
+        if (adult) {
+            window.location.reload();
+        } else {
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
         movieEl.innerHTML = `
@@ -30,10 +34,10 @@ function showMovies(movies) {
         <div class="overview">
         <h3>Обзор</h3>
         ${overview}
-        <a class = "kino" href = "https://www.kinopoisk.ru/index.php?kp_query=${title}"></br>Смотреть на кинопоиске.</a>
         </div>
         `
         main.appendChild(movieEl)
+        }
     });
 }
 
