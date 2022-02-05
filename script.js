@@ -30,7 +30,7 @@ function showMovies(movies) {
         <div class="overview">
         <h3>Обзор</h3>
         ${overview}
-        <a href = "https://www.kinopoisk.ru/index.php?kp_query=${title}"></a>
+        <a href = "https://www.kinopoisk.ru/index.php?kp_query=${title}">Смотреть на кинопоиске.</a>
         </div>
         `
         main.appendChild(movieEl)
