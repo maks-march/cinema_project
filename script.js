@@ -32,10 +32,10 @@ function showMovies(movies) {
         <span class="${getClassByRate(vote_average)}">${vote_average}</span>
         </div>
         <div class="overview">
-        <h3>Обзор</h3>
+        <h3>Review</h3>
         ${overview}
         </br>
-        <a class= "hyperlink" href = "https://www.kinopoisk.ru/index.php?kp_query=${title}">Ссылка на кинопоиск.</a>
+        <a class= "hyperlink" href = "https://www.kinopoisk.ru/index.php?kp_query=${title}">Watch on kinopoisk.</a>
         </div>
         `
         main.appendChild(movieEl)
