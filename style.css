@@ -105,3 +105,9 @@ main {
 .movie:hover .overview {
     transform: translateY(0);
 }
+
+.hyperlink {
+    color: black;
+    text-decoration: underline;
+    font-size: 14px;
+}
