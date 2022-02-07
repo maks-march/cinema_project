@@ -3,16 +3,17 @@
     --secondary-color: #373b69;
 }
 
-@media (min-width:800px){
+@media (min-width:900px){
     .rec {
+        display: block;
         margin-right: 65vw;
-        width: 8.5rem;
+        width: 6.5rem;
     }
     .search {
         width: 15vw;
     }
 }
-@media (max-width:800px){
+@media (max-width:900px){
     header {
         height: 18vh;
         display:block;
@@ -21,7 +22,7 @@
         margin-right: 0;
         position: absolute;
         transform: translateX(5rem);
-        width: 40vw;
+        width: 6rem;
         z-index: 1;
     }
     .home {
