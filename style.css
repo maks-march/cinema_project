@@ -43,6 +43,7 @@ header {
 }
 
 .search {
+    
     background-color: transparent;
     border: 2px solid var(--primary-color);
     border-radius: 50px;
