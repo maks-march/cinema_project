@@ -1,0 +1,42 @@
+:root {
+    --primary-color: #22254b;
+    --secondary-color: #373b69;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--secondary-color);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #fff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    margin: 0;
+    display: block;
+    height: 8vh;
+    width: 100vw;
+    background-color: var(--primary-color);
+}
+
+
+.START {
+    font-size: larger;
+    height: 8vh;
+    width: 9vw;
+    text-align: center;
+    border-radius: 15px;
+    background-color: transparent;
+    border: 3px solid var(--primary-color);
+    font-weight: 700;
+}
+
+.START:active {
+    background-color: var(--primary-color);
+}
