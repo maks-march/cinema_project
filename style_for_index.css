@@ -3,6 +3,42 @@
     --secondary-color: #373b69;
 }
 
+@media (min-width:900px){
+    .START {
+        padding-top: 2.5vh;
+        font-size: larger;
+        height: 8vh;
+        width: 9vw;
+        text-align: center;
+        border-radius: 15px;
+        background-color: transparent;
+        border: 3px solid var(--primary-color);
+        font-weight: 700;
+    }
+    span {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom:15px;
+    }
+
+}
+
+@media (max-width:900px){
+    .START {
+        font-size: larger;
+        height: 8vh;
+        width: 40vw;
+        text-align: center;
+        padding-top: 15px;
+        border-radius: 15px;
+        background-color: transparent;
+        border: 3px solid var(--primary-color);
+        font-weight: 700;
+    }
+    
+}
+
 * {
     box-sizing: border-box;
 }
@@ -15,6 +51,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 
 header {
@@ -25,16 +62,22 @@ header {
     background-color: var(--primary-color);
 }
 
-
-.START {
-    font-size: larger;
+footer {
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+    display: block;
     height: 8vh;
-    width: 9vw;
-    text-align: center;
-    border-radius: 15px;
-    background-color: transparent;
-    border: 3px solid var(--primary-color);
-    font-weight: 700;
+    width: 100vw;
+    background-color: var(--primary-color);
+    padding-left: 7px;
+}
+span {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+main {
+    padding-left: 7px;
 }
 
 .START:active {
