@@ -46,6 +46,10 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 body {
     z-index: -1;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -65,17 +69,16 @@ footer {
     font-family:Verdana, Geneva, Tahoma, sans-serif ;
     margin: 0;
     color: #fff;
-    display: block;
-    padding-left: 90vw;
+    display: flex;
     height: 5vh;
-    width: 100vw;
     background-color: var(--secondary-color);
-    padding-left: 7px;
+    width: 100vw;
+
 }
 
 span {
     position: absolute;
-    right: 0;
+    right: 20px;
     bottom:5px;
 }
 

@@ -75,6 +75,7 @@ footer {
 span {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
+    right: 15px;
 }
 main {
     padding-left: 7px;
