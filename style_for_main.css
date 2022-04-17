@@ -109,10 +109,10 @@ span {
         font-family: inherit;
         font-size: 1rem;
         font-weight: 700;
-        text-align: center;
         padding: 0.5rem 1rem;
+        text-align:center;
         color: #fff;
-        width: 5rem;
+        width: 6.5rem;
         height: 2.5rem;
 }
 .home:active {
@@ -131,6 +131,7 @@ span {
         padding-top: 10px;
         color: #fff;
         height: 2.5rem;
+        width: 6rem;
 }
 .rec:active {
     background-color: var(--primary-color);
