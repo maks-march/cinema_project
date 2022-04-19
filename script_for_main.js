@@ -12,54 +12,42 @@ const API_URL_search = "https://kinopoiskapiunofficial.tech/api/v2.2/films/searc
 
 getMovies(API_URL_top);
 
-async function getMovies(URL,searchTerm) {
-    const data = [];
-    if (typeof(searchTerm) == "undefined" && searchTerm == null){
-        const result = await fetch(URL, {
-           method: 'GET',
-           headers: {
-                'X-API-KEY': '79012899-2016-4077-9388-1ce05b3d8677',
-                'Content-Type': 'application/json',
-               },
-        })
-        data.push(await result.json());
-    } else {
-        // const result = await fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/keyword=${searchTerm}&page=1`, {
-        //     method: 'GET',
-        //     headers: {
-        //         'X-API-KEY': '79012899-2016-4077-9388-1ce05b3d8677',
-        //         'Content-Type': 'application/json',
-        //     },
-        // })
-        // data.push(await result.json());
-    }
-    // film = data[0]['films'];
-    
-    // film.forEach((movie) => {
-    //     const {filmId} = movie;
-    //     const result = fetch(`https://kinopoiskapiunofficial.tech/api/v1/reviews/filmId=${filmId}&page=1`, {
-    //         method: 'GET',
-    //         headers: {
-    //             'X-API-KEY': '79012899-2016-4077-9388-1ce05b3d8677',
-    //             'Content-Type': 'application/json',
-    //         },
-    //     });
-    //     console.log(await result.json) 
-        
+async function infoMovie(filmId,movie) {
+    const result = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/'+filmId, {
+        method: 'GET',
+        mode: 'no-cors',
+        headers: {
+            'X-API-KEY': '79012899-2016-4077-9388-1ce05b3d8677',
+            'Content-Type': 'application/json',
+        },
+    })
+    movie.push(await result.json());
+    console.log(movie);
+}
 
-    // })
-    //const movies = [];
-    //data[0]['films'].forEach(movie => infoMovies(movies,movie));
+async function getMovies(URL) {
+    const data = [];
+    const result = await fetch(URL, {
+        method: 'GET',
+        headers: {
+            'X-API-KEY': '79012899-2016-4077-9388-1ce05b3d8677',
+            'Content-Type': 'application/json',
+        },
+    })
+    data.push(await result.json());
     showMovies(data);
 }
 
 
 
 
-function showMovies(movies) {
+async function showMovies(movies) {
     main.innerHTML = '';
     film = movies[0]['films'];
-    film.forEach((movie) => {
+    film.forEach((movie) => createMovies(movie));
+}
+
+async function createMovies(movie){
         const {nameRu, posterUrl, rating, description} = movie;
         if (posterUrl !== null && description !== '') {
         const movieEl = document.createElement('div');
@@ -80,21 +68,6 @@ function showMovies(movies) {
         main.appendChild(movieEl);    
         }
     }
-    );
-}
-
-async function infoMovies(movies,movie){
-    const{filmId} = movie;
-    const result = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/'+filmId, {
-        method: 'GET',
-        headers: {
-            'X-API-KEY': '79012899-2016-4077-9388-1ce05b3d8677',
-            'Content-Type': 'application/json',
-        },
-    })
-    console.log(await result.json())
-    movies.push(await result.json());
-}
 
 function getClassByRate(vote_average) {
     if(vote_average>=8) {
@@ -109,9 +82,9 @@ function getClassByRate(vote_average) {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const searchTerm = search.value;
-    if(searchTerm !== '') {
+    if(typeof(searchTerm) == "undefined" && searchTerm !== '') {
         main.innerHTML = '';
-        getMovies(API_URL_search,searchTerm);
+        getMovies(API_URL_search+searchTerm+'&page=1');
     } else {
         window.location.reload();
     }
