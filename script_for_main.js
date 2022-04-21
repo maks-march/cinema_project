@@ -12,17 +12,22 @@ const API_URL_search = "https://kinopoiskapiunofficial.tech/api/v2.2/films/searc
 
 getMovies(API_URL_top);
 
-async function infoMovie(filmId,movie) {
-    const result = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/'+filmId, {
-        method: 'GET',
-        mode: 'no-cors',
-        headers: {
-            'X-API-KEY': '79012899-2016-4077-9388-1ce05b3d8677',
-            'Content-Type': 'application/json',
-        },
-    })
-    movie.push(await result.json());
-    console.log(movie);
+async function infoMovie(filmId) {
+    const movie = [];
+    const result = setTimeout(async function(filmId){
+        const result = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/'+filmId, {
+            method: 'GET',
+            mode: 'no-cors',
+            headers: {
+                'X-API-KEY': '79012899-2016-4077-9388-1ce05b3d8677',
+                'Content-Type': 'application/json',
+            },
+        })
+        return await result.json();
+    }
+    ,100);
+    movie.push(result);
+    return result;
 }
 
 async function getMovies(URL) {
@@ -48,25 +53,27 @@ async function showMovies(movies) {
 }
 
 async function createMovies(movie){
-        const {nameRu, posterUrl, rating, description} = movie;
-        if (posterUrl !== null && description !== '') {
-        const movieEl = document.createElement('div');
-        movieEl.classList.add('movie');
-        movieEl.innerHTML = `
-        <img src="${posterUrl}" alt="">
-        <div class="movie-info">
-        <h3>${nameRu}</h3>
-        <span class="${getClassByRate(rating)}">${rating}</span>
-        </div>
-        <div class="overview">
-        <h3>Описание</h3>
-        ${description}
-        </br>
-        <a class= "hyperlink" href = "https://www.kinopoisk.ru/index.php?kp_query=${nameRu}">Смотреть на кинопоиске.</a>
-        </div>
-        `
-        main.appendChild(movieEl);    
-        }
+        const {filmId} = movie;
+        const film = infoMovie(filmId);
+        console.log(film);
+        // if (posterUrl !== null && description !== '') {
+        // const movieEl = document.createElement('div');
+        // movieEl.classList.add('movie');
+        // movieEl.innerHTML = `
+        // <img src="${posterUrl}" alt="">
+        // <div class="movie-info">
+        // <h3>${nameRu}</h3>
+        // <span class="${getClassByRate(rating)}">${rating}</span>
+        // </div>
+        // <div class="overview">
+        // <h3>Описание</h3>
+        // ${description}
+        // </br>
+        // <a class= "hyperlink" href = "https://www.kinopoisk.ru/index.php?kp_query=${nameRu}">Смотреть на кинопоиске.</a>
+        // </div>
+        // `
+        // main.appendChild(movieEl);    
+        // }
     }
 
 function getClassByRate(vote_average) {
