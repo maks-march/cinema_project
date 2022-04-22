@@ -8,22 +8,9 @@ const home = document.querySelector('.home');
 
 const API_URL_top = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top'
 const API_URL_new = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres'
-const API_URL_search = "https://kinopoiskapiunofficial.tech/api/v2.2/films/search-by-keyword/keyword="
+const API_URL_search = "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword="
 
 getMovies(API_URL_top);
-
-async function getResult(filmId){
-    const results = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/'+filmId, {
-        method: 'GET',
-        headers: {
-            'X-API-KEY': '79012899-2016-4077-9388-1ce05b3d8677',
-            'accept': 'application/json',
-        },
-    })
-    return results;
-    
-}
-
 async function getMovies(URL) {
     const data = [];
     const result = await fetch(URL, {
@@ -37,20 +24,33 @@ async function getMovies(URL) {
     showMovies(data);
 }
 
-
-
-
 async function showMovies(movies) {
     main.innerHTML = '';
     film = movies[0]['films'];
-    film.forEach((movie) => createMovies(movie));
+    film.forEach((movie) => resultMovies(movie));
+}
+async function resultMovies(movie){
+        console.log(movie)
+        const {filmId} = movie;
+        setTimeout(() => {console.log('ok')}, 1000);
+        getResult(filmId);
+}
+async function getResult(filmId){
+    let data = [];
+    const results = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/'+filmId, {
+        method: 'GET',
+        headers: {
+            'X-API-KEY': '79012899-2016-4077-9388-1ce05b3d8677',
+            'accept': 'application/json',
+        },
+    })
+    data = (await results.json());
+    console.log(data)
+    //createMovie(data)
 }
 
-async function createMovies(movie){
-        const {nameRu,posterUrl,description,rating,filmId} = movie;
-        setTimeout(()=>{}, 200);
-        const film = getResult(filmId)
-        console.log(film)
+function createMovie(movie) {
+        const {nameRu,posterUrl,description,ratingKinopoisk} = movie
         if (posterUrl !== null && description !== '') {
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
@@ -58,7 +58,7 @@ async function createMovies(movie){
         <img src="${posterUrl}" alt="">
         <div class="movie-info">
         <h3>${nameRu}</h3>
-        <span class="${getClassByRate(rating)}">${rating}</span>
+        <span class="${getClassByRate(ratingKinopoisk)}">${ratingKinopoisk}</span>
         </div>
         <div class="overview">
         <h3>Описание</h3>
@@ -69,7 +69,11 @@ async function createMovies(movie){
         `
         main.appendChild(movieEl);    
         }
-    }
+}
+
+
+
+
 
 function getClassByRate(vote_average) {
     if(vote_average>=8) {
@@ -84,12 +88,10 @@ function getClassByRate(vote_average) {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const searchTerm = search.value;
-    if(typeof(searchTerm) == "undefined" && searchTerm !== '') {
+    if(searchTerm !== '') {
         main.innerHTML = '';
         getMovies(API_URL_search+searchTerm+'&page=1');
-    } else {
-        window.location.reload();
-    }
+    } 
 });
 
 home.addEventListener('click',()=>{
