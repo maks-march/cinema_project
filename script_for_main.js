@@ -10,8 +10,10 @@ const API_URL_top = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top'
 const API_URL_new = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres'
 const API_URL_search = "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword="
 
+    
 getMovies(API_URL_top);
 async function getMovies(URL) {
+    
     const data = [];
     const result = await fetch(URL, {
         method: 'GET',
@@ -24,16 +26,34 @@ async function getMovies(URL) {
     showMovies(data);
 }
 
+function time() {
+    
+}
+
 async function showMovies(movies) {
     main.innerHTML = '';
     film = movies[0]['films'];
     film.forEach((movie) => resultMovies(movie));
 }
 async function resultMovies(movie){
-        console.log(movie)
-        const {filmId} = movie;
-        setTimeout(() => {console.log('ok')}, 1000);
-        getResult(filmId);
+        const {filmId,description,rating} = movie;
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => resolve("готово!"), 1000)
+        });
+        
+        let res = await promise;
+        console.log(res)
+        if (description == null){
+            if (rating !== 'null'){
+                //getResult(filmId);                
+            }
+        } else {
+            if (rating !== 'null'){
+                createMovie(movie);
+                console.log('ok')
+            }
+        }
+
 }
 async function getResult(filmId){
     let data = [];
@@ -46,11 +66,16 @@ async function getResult(filmId){
     })
     data = (await results.json());
     console.log(data)
-    //createMovie(data)
+    createMovie(data)
 }
 
 function createMovie(movie) {
-        const {nameRu,posterUrl,description,ratingKinopoisk} = movie
+        const {nameRu,posterUrl,description} = movie
+        let {rating} = movie;
+        if (rating == undefined){
+            const {ratingKinopoisk} = movie
+            rating = ratingKinopoisk;
+        }
         if (posterUrl !== null && description !== '') {
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
@@ -58,7 +83,7 @@ function createMovie(movie) {
         <img src="${posterUrl}" alt="">
         <div class="movie-info">
         <h3>${nameRu}</h3>
-        <span class="${getClassByRate(ratingKinopoisk)}">${ratingKinopoisk}</span>
+        <span class="${getClassByRate(rating)}">${rating}</span>
         </div>
         <div class="overview">
         <h3>Описание</h3>
@@ -76,7 +101,7 @@ function createMovie(movie) {
 
 
 function getClassByRate(vote_average) {
-    if(vote_average>=8) {
+    if(vote_average>=7) {
         return 'green';
     } else if (vote_average>=5) {
         return 'orange';
