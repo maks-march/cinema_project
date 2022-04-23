@@ -7,12 +7,16 @@
     .rec {
         display: block;
         margin-right: 65vw;
-        width: 7vw;
-        height: 2.5rem;
+        width: 120px;
+        height: 50px;
+        font-size: 20px;
+        margin-left: 0.7rem;
     }
     .home {
-        width: 7vw;
-        height: 2.5rem;
+        width: 120px;
+        height: 50px;
+        font-size: 20px;
+        margin-left: 0.2rem;
     }
     .search {
         width: 15vw;
@@ -23,26 +27,34 @@
     header{
         padding: 1rem;
     }
+    footer{
+        display: flex;
+    }
 }
 @media (max-width:900px){
     header {
-        height: 20%;
+        height: 180px;
+        width: 100vw;
         padding: 10px;
-        min-height: 138px;
+        position: absolute;
         display:flex;
         flex-direction: column;
         align-items:flex-start;
     }
+    footer {
+        display: none;
+    }
     .rec {
         margin-top: 6px;
         width: 90px;
-        height: 6vh;
+        height: 45px;
         z-index: 1;
         font-size: 95%;
+        
     }
     .home {
         width: 90px;
-        height: 6vh;
+        height:45px;
         font-size: 95%;
     }
     .search {
@@ -70,6 +82,7 @@ body {
     background-color: var(--primary-color);
     margin: 0;
     height: 100vh;
+    width: 100vw;
 }
 
 header {
@@ -83,7 +96,6 @@ footer {
     font-family:Verdana, Geneva, Tahoma, sans-serif ;
     margin: 0;
     color: #fff;
-    display: flex;
     height: 5vh;
     background-color: var(--secondary-color);
     width: 100vw;
@@ -116,7 +128,7 @@ span {
 }
 
 .home {
-    margin-left: 0.2rem;
+
     background-color: transparent;
     border: 2px solid var(--primary-color);
     border-radius: 5px;
@@ -132,7 +144,7 @@ span {
 }
 
 .rec {
-        margin-left: 0.2rem;
+        
         background-color: transparent;
         border: 2px solid var(--primary-color);
         border-radius: 5px;
