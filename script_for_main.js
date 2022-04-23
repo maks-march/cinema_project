@@ -7,10 +7,9 @@ const home = document.querySelector('.home');
 
 
 const API_URL_top = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top'
-const API_URL_new = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres'
+const API_URL_new = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2022&month=JANUARY'
 const API_URL_search = "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword="
 
-    
 getMovies(API_URL_top);
 async function getMovies(URL) {
     
@@ -26,26 +25,29 @@ async function getMovies(URL) {
     showMovies(data);
 }
 
-function time() {
-    
-}
 
 async function showMovies(movies) {
     main.innerHTML = '';
     film = movies[0]['films'];
-    film.forEach((movie) => resultMovies(movie));
+    if (film == undefined) {
+        film = movies[0]['items'];
+        console.log(film)
+    }
+    for (let index = 0; index < film.length; index++) {
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => resolve("готово!"), 50)
+          });
+        
+        let res = await promise; 
+        //resultMovies(film[index]);
+        
+    }
 }
 async function resultMovies(movie){
         const {filmId,description,rating} = movie;
-        let promise = new Promise((resolve, reject) => {
-            setTimeout(() => resolve("готово!"), 1000)
-        });
-        
-        let res = await promise;
-        console.log(res)
         if (description == null){
             if (rating !== 'null'){
-                //getResult(filmId);                
+                getResult(filmId);                
             }
         } else {
             if (rating !== 'null'){
@@ -53,8 +55,8 @@ async function resultMovies(movie){
                 console.log('ok')
             }
         }
-
 }
+
 async function getResult(filmId){
     let data = [];
     const results = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/'+filmId, {
