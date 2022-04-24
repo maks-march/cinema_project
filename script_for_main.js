@@ -39,7 +39,7 @@ async function showMovies(movies) {
           });
         
         let res = await promise; 
-        //resultMovies(film[index]);
+        resultMovies(film[index]);
         
     }
 }
