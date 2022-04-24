@@ -31,9 +31,8 @@ async function showMovies(movies) {
     film = movies[0]['films'];
     if (film == undefined) {
         film = movies[0]['items'];
-        console.log(film)
     }
-    for (let index = 0; index < film.length; index++) {
+    for (let index = 0; index < 25; index++) {
         let promise = new Promise((resolve, reject) => {
             setTimeout(() => resolve("готово!"), 50)
           });
@@ -44,7 +43,12 @@ async function showMovies(movies) {
     }
 }
 async function resultMovies(movie){
-        const {filmId,description,rating} = movie;
+        const {description,rating} = movie;
+        let {filmId} = movie;
+        if (filmId == undefined){
+            const {kinopoiskId} = movie;
+            filmId = kinopoiskId;
+        }
         if (description == null){
             if (rating !== 'null'){
                 getResult(filmId);                
@@ -52,13 +56,16 @@ async function resultMovies(movie){
         } else {
             if (rating !== 'null'){
                 createMovie(movie);
-                console.log('ok')
             }
         }
 }
-
 async function getResult(filmId){
     let data = [];
+    let promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve("готово!"), 100)
+      });
+    
+    let res = await promise; 
     const results = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/'+filmId, {
         method: 'GET',
         headers: {
@@ -67,7 +74,6 @@ async function getResult(filmId){
         },
     })
     data = (await results.json());
-    console.log(data)
     createMovie(data)
 }
 
@@ -78,7 +84,7 @@ function createMovie(movie) {
             const {ratingKinopoisk} = movie
             rating = ratingKinopoisk;
         }
-        if (posterUrl !== null && description !== '') {
+        if (posterUrl !== null && description !== '' && nameRu !== 'Свингеры') {
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
         movieEl.innerHTML = `
