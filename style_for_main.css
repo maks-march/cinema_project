@@ -65,7 +65,9 @@
     span {
         display:none;
     }
-    
+    main {
+        padding-top:180px;
+    }
 }
 
 
