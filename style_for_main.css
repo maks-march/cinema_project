@@ -65,6 +65,9 @@
     span {
         display:none;
     }
+    main {
+        margin-top:180px;
+    }
 }
 
 
